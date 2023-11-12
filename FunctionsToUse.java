@@ -161,7 +161,7 @@ class FunctionsToUse {
     }
 
     // Binary search of array
-    public int binarySearch(int[] nums, int target) {
+    public static int binarySearch(int[] nums, int target) {
         int p1 = 0;
         int p2 = nums.length-1;
         while(p1<=p2){
@@ -182,7 +182,7 @@ class FunctionsToUse {
     }
 
     // Letzte Zahl in array um 1 hochmachen
-    public int[] plusOne(int[] digits) {
+    public static int[] plusOne(int[] digits) {
         for (int i = digits.length-1; i>=0; i--){
             if (digits[i] < 9){
                 digits[i] = digits[i] +1;
@@ -221,7 +221,7 @@ class FunctionsToUse {
     }
 
     // two sum problem
-    public int[] twoSum(int[] nums, int target) {
+    public static int[] twoSum(int[] nums, int target) {
         int[] returnArray = new int[2];
         boolean solutionFound = false;
         int index = 0;
@@ -381,11 +381,55 @@ class FunctionsToUse {
     }
 
 
+    // sort a 1d array by increasing integers
+    public static int[] sortArray(int[] a){
+        //first we make a new array
+        int[] resultArray = new int[a.length];
+        //now for every element in a, we look for its right index
+        int index = 0;
+        int tmp = 0;
+        int toInsert = 0;
+        resultArray[0] = a[0];
+        for (int i = 1; i<a.length; i++){
+            //we have to go back to the beginning until we find a number thats equal or smaller
+            for (int k = i; k>=0; k--){
+                if (k==0){
+                    //if k is zero then that means we have to insert at the index 0!
+                    index = 0;
+                    toInsert = a[i];
+                    for (int n=index;n<resultArray.length;n++){
+                        tmp = resultArray[index]; //first copy the previous value into tmp
+                        resultArray[index] = toInsert; // replace with the correct value
+                        toInsert = tmp; //the tmp becomes the new value to insert
+                        index+=1;
+                    }
+                    break;
+                }
+                if (resultArray[k-1] <= a[i]){
+                    //if the number is either smaller or the same
+                    index = k;
+                    toInsert = a[i];
+                    // as soon as we have the right index, we need to insert the number
+                    // at its correct index
+                    for (int n=index;n<resultArray.length;n++){
+                        tmp = resultArray[index]; //first copy the previous value into tmp
+                        resultArray[index] = toInsert; // replace with the correct value
+                        toInsert = tmp; //the tmp becomes the new value to insert
+                        index+=1;
+                    }
+                    break;
+                }
+            }
+        }
+        return resultArray;
+    }
 
 
 
     public static void main(String [] args){
-
+        //test functions and do stuff here
+        int[] a = {1,0,1};
+        int[] b = {2,5};
     }
 
 }
