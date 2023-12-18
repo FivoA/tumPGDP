@@ -1,4 +1,4 @@
-import java.util.Iterator;
+/*  import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -173,6 +173,85 @@ public class Iterators {
     }
     // end
 
+    // ANOTHER BST TREE ITERATOR WITH STACK
+    class BSTIterator {
+
+        TreeNode temp;
+        Stack<TreeNode> stk = new Stack<>();
+
+        public BSTIterator(TreeNode root) {
+            this.temp = root;
+        }
+
+        public int next() {
+            int t = 0;
+            while (true){
+                if (temp!=null){
+                    stk.push(temp);
+                    temp = temp.left;
+                }
+                else if(temp==null && stk.isEmpty()){
+                    break;
+                }
+                else{
+                    temp = stk.isEmpty() ? null : stk.pop();
+                    if(temp!=null) t = temp.val;
+                    temp = temp.right;
+                    break;
+                }
+            }
+            return t;
+        }
+
+        public boolean hasNext() {
+            return temp!=null || (temp==null && !stk.isEmpty());
+        }
+
+    }
+    //end
+
+
+    // A TRAVEL ITERATORS MAYBE FOR GRAPHS
+    public class TravelIterator implements Iterator<Destination> {
+
+    public List<Destination> alreadyVisited;
+    private Destination currentDestination;
+
+    // Do not change the signature of the constructor!
+    public TravelIterator(Destination startDestination) {
+        currentDestination = startDestination;
+        alreadyVisited= new ArrayList<>();
+    }
+
+    @Override
+    public boolean hasNext() {
+        return currentDestination!=null;
+    }
+
+    @Override
+    public Destination next() {
+        Destination tmp = currentDestination;
+        alreadyVisited.add(currentDestination);
+        boolean hasFound = false;
+        for (Destination d: currentDestination.getTrainConnections()) {
+            if (!alreadyVisited.contains(d)){
+                currentDestination = d;
+                hasFound=true;
+                break;
+            }
+        }
+        if (!hasFound){
+            currentDestination = null;
+        }
+        return tmp;
+    }
+    }
+    //end
+
 
 
 }
+
+
+
+ */
